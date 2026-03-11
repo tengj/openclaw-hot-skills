@@ -2,6 +2,8 @@
 
 - ClawHub: https://clawhub.ai/tengj/openclaw-hot-skills
 - GitHub: https://github.com/tengj/openclaw-hot-skills
+- Author: tengj
+- Dependency: requires `clawhub` CLI
 
 发现 ClawHub 上值得关注的热门 Skill，并整理成可读、可安装、可决策的榜单。
 

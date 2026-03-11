@@ -1,6 +1,23 @@
 ---
 name: openclaw-hot-skills
 description: Discover trending, must-have, and topic-specific high-value skills from ClawHub. Use when the user asks to see hot/popular/trending OpenClaw skills, wants a ranked shortlist of worth-installing skills, asks what skills are popular recently, wants a must-have install list, or wants help finding popular skills for a specific theme such as PDF, GitHub, knowledge base, browser automation, speech-to-text, docs, search, or productivity. Also use when the output should include ClawHub links and whether each skill is already installed locally.
+metadata:
+  {
+    "openclaw":
+      {
+        "requires": { "bins": ["clawhub"] },
+        "install":
+          [
+            {
+              "id": "node",
+              "kind": "node",
+              "package": "clawhub",
+              "bins": ["clawhub"],
+              "label": "Install ClawHub CLI (npm)"
+            }
+          ]
+      }
+  }
 ---
 
 # OpenClaw Hot Skills
