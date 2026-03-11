@@ -1,6 +1,6 @@
 ---
 name: openclaw-hot-skills
-description: Discover trending, must-have, and topic-specific high-value skills from ClawHub. Use when the user asks to see hot/popular/trending OpenClaw skills, wants a ranked shortlist of worth-installing skills, asks what skills are popular recently, wants a must-have install list, or wants help finding popular skills for a specific theme such as PDF, GitHub, knowledge base, browser automation, speech-to-text, docs, search, or productivity. Also use when the output should include ClawHub links and whether each skill is already installed locally.
+description: Discover trending, must-have, and topic-specific high-value skills from ClawHub. Use when the user asks to see hot/popular/trending OpenClaw skills, wants a ranked shortlist of worth-installing skills, asks what skills are popular recently, wants a must-have install list, wants help finding popular skills for a specific theme such as PDF, GitHub, knowledge base, browser automation, speech-to-text, docs, search, or productivity, or says things like "帮我找个 skill", "有没有这种 skill", "有什么值得装的 skill", "最近有什么好用的 skill", or "怎么扩展能力". Also use when the output should include ClawHub links and whether each skill is already installed locally.
 metadata:
   {
     "openclaw":
@@ -22,13 +22,25 @@ metadata:
 
 # OpenClaw Hot Skills
 
-Use `clawhub` CLI to collect a concise shortlist of trending, widely-installed, or high-signal skills from ClawHub and present them in a clean, decision-friendly format.
+Use `clawhub` CLI to help users discover, compare, and decide which ClawHub skills are worth paying attention to.
+
+This skill is not only a ranking tool, but also a skill discovery assistant. Use it to:
+- find trending skills
+- find must-have skills
+- find skills for a specific theme
+- compare candidate skills
+- help the user decide whether to install something
 
 Keep the output curated. The goal is not to dump raw registry results, but to help the user quickly understand what is popular, what each skill does, whether it is already installed locally, and what to do next.
 
 ## Workflow
 
-1. Infer the requested mode from the user's wording:
+1. First understand what the user is actually trying to do:
+   - discover hot skills
+   - find a skill for a task
+   - compare several candidate skills
+   - decide whether something is worth installing
+2. Infer the requested mode from the user's wording:
    - `最近趋势榜` / `热门` / `trending` → prefer `trending`
    - `装机必备榜` / `最常装` / `必备` → prefer `installsAllTime` or `installs`
    - `找 X 相关热门 skill` / `搜 X 类 skill` / `有没有 X 方向的 skill` → use topic search mode
@@ -60,6 +72,7 @@ Keep the output curated. The goal is not to dump raw registry results, but to he
    - `https://clawhub.com/skills/<slug>`
 10. Deduplicate near-identical results across sort modes or search queries.
 11. Output a curated shortlist rather than dumping raw JSON.
+12. Offer the next best action: compare, inspect, install, or switch ranking mode.
 
 If one source fails but another succeeds, continue with the best available result and briefly note the fallback.
 
@@ -176,6 +189,22 @@ Prefer skills centered on notes, docs, pages, vaults, databases, or content orga
 - docs / wiki / reader / filing workflows
 
 If a skill fits multiple groups, place it in the most useful primary group and avoid duplicate listing unless the user asks for cross-category analysis.
+
+## No-Match Fallback
+
+If no strongly relevant skills are found:
+1. Say clearly that no strong match was found.
+2. Offer nearby alternatives instead of stopping abruptly.
+3. If topic search is too narrow, broaden once to an adjacent theme.
+4. If still weak, offer one of:
+   - a broader themed shortlist
+   - the global trending list
+   - the must-have list
+   - a suggestion that the user may want to create a custom skill
+
+Example fallback phrasing:
+- `我没找到特别强匹配的 PDF 专项 skill，但有几款文档/OCR/提取类 skill 可以作为替代。`
+- `这个方向在 ClawHub 里还比较少，我可以先给你相近主题的 skill，或者帮你设计一个自定义 skill。`
 
 ## Install Requests
 
